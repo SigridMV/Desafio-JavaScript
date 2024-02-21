@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 1</title>
+  </head>
+
+  <body>
+    <div>
+      <div style="width: 40%; margin: 0 auto">
+        <h2>Escríbenos !!!</h2>
+        <div class="resultado" style="color: green; font-style: italic"></div>
+        <form id="formulario">
+          <div>
+            <div style="display: flex; flex-direction: column">
+              <label> Nombre completo </label>
+              <input id="nombre" type="text" />
+              <p class="errorNombre" style="color: red; font-style: italic"></p>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <label> Asunto </label>
+              <input id="asunto" type="text" />
+              <p class="errorAsunto" style="color: red; font-style: italic"></p>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <label> Mensaje </label>
+            <textarea id="mensaje"></textarea>
+            <p class="errorMensaje" style="color: red; font-style: italic"></p>
+          </div>
+          <div>
+            <button id="botton" type="submit">Envíar mensaje</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      // Obtener el formulario del documento por su ID
+      let form = document.getElementById("formulario");
+      // Evento de escucha para el evento "submit" del formulario
+      form.addEventListener("submit", function (event) {
+        // Prevencion del comportamiento por defecto del formulario (envío)
+        event.preventDefault();
+        // Llamar a la función para limpiar los mensajes de error
+        limpiarErrores();
+
+        // Recibir los valores de los campos del formulario
+        let nombre = document.getElementById("nombre").value;
+        let asunto = document.getElementById("asunto").value;
+        let mensaje = document.getElementById("mensaje").value;
+
+        // Validar los campos del formulario y se obtiene resultado
+        let resultado = validar(nombre, asunto, mensaje);
+
+        // Si la validación es exitosa (resultado == true), y se llama a la función de éxito
+        if (resultado == true) {
+          exito();
+        }
+      });
+
+      // Función para limpiar los mensajes de error del HTML
+      function limpiarErrores() {
+        document.querySelector(".resultado").innerHTML = "";
+        document.querySelector(".errorNombre").innerHTML = "";
+        document.querySelector(".errorAsunto").innerHTML = "";
+        document.querySelector(".errorMensaje").innerHTML = "";
+      }
+
+      // Funcion mensaje exito en el HTML
+      function exito() {
+        document.querySelector(".resultado").innerHTML =
+          "Mensaje enviado con éxito!!!";
+      }
+
+      // Funcion validar los campos del formulario
+      function validar(nombre, asunto, mensaje) {
+        let pasamosLaValidacion = true;
+
+        //Expresion regular para validar que el nombre tenga solo letras y espacios
+        let validacionNombre = /^[a-zA-Z\s]+$/;
+        //Mensaje de error en caso de no cumplir con la validacion
+        if (!validacionNombre.test(nombre)) {
+          document.querySelector(".errorNombre").innerHTML =
+            "El nombre es requerido.";
+          pasamosLaValidacion = false;
+        }
+        //Expresion regular para validar que el asunto tenga solo letras y espacios
+        let validacionAsunto = /^[a-zA-Z\s]+$/;
+        //Mensaje de error en caso de no cumplir con la validacion
+        if (!validacionAsunto.test(asunto)) {
+          document.querySelector(".errorAsunto").innerHTML =
+            "El asunto es requerido";
+          pasamosLaValidacion = false;
+        }
+
+        //Expresion regular para validar que el mensaje tenga solo letras y espacios
+        let validacionMensaje = /^[a-zA-Z\s]+$/;
+        //Mensaje de error en caso de no cumplir con la validacion
+        if (!validacionMensaje.test(mensaje)) {
+          document.querySelector(".errorMensaje").innerHTML =
+            "El mensaje es requerido.";
+          pasamosLaValidacion = false;
+        }
+
+        //retornar resultado de validacion 
+        return pasamosLaValidacion;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 3</title>
+  </head>
+
+  <body>
+    <div>
+      <div>
+        <h2>Resultado: <span class="resultado"></span></h2>
+        <div>
+          <div>
+            <div>
+              <label for="">Valor 1</label>
+              <input id="valor1" type="text" />
+            </div>
+            <div>
+              <label for="">Valor 2</label>
+              <input id="valor2" type="text" />
+            </div>
+            <div style="display: flex">
+              <button id="btn-sumar" type="button">Sumar</button>
+              <button id="btn-restar" type="button">Restar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        // Obtener los elementos del documento HTML
+        var valor_1 = document.getElementById("valor1");// primer valor
+        var valor_2 = document.getElementById("valor2");// segundo valor
+        var resultados = document.querySelector(".resultado"); 
+        var btnSumar = document.getElementById("btn-sumar");// Botón para sumar
+        var btnRestar = document.getElementById("btn-restar"); // Botón para restar
+
+
+        // Función sumar
+        function sumar() {
+          var valor1 = parseInt(valor_1.value) || 0;
+          var valor2 = parseInt(valor_2.value) || 0;
+          var resultado = valor1 + valor2;
+          resultados.textContent = resultado;
+        }
+
+        // Función restar
+        function restar() {
+          var valor1 = parseInt(valor_1.value) || 0;
+          var valor2 = parseInt(valor_2.value) || 0;
+          var resultado = valor1 - valor2;
+          // mostrar 0 cuando el resultado es negativo
+          if (resultado < 0) {
+            resultado = 0;
+          }
+          resultados.textContent = resultado;
+        }
+
+        // Event listener botón de sumar
+        btnSumar.addEventListener("click", sumar);
+
+        // Event listener botón de restar
+        btnRestar.addEventListener("click", restar);
+    
+    </script>
+  </body>
+</html>
